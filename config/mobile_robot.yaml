@@ -1,0 +1,32 @@
+# Mobile robot configuration
+robot:
+  type: mobile
+  platform: differential_drive
+  
+# Differential drive specific parameters
+differential_drive:
+  wheel_radius: 0.1
+  wheel_base: 0.3
+  max_wheel_speed: 10.0
+  
+# PID controller tuned for mobile robot
+controller:
+  type: pid
+  gains:
+    kp: 2.0
+    ki: 0.2
+    kd: 0.1
+  output_limits: [-10.0, 10.0]
+  
+# Sensors for mobile robot
+sensors:
+  imu:
+    enabled: true
+    noise_std: 0.005
+  camera:
+    enabled: true
+    resolution: [640, 480]
+  lidar:
+    enabled: true
+    range_max: 5.0
+    num_beams: 180

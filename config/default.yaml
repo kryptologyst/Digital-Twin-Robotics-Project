@@ -1,0 +1,69 @@
+# Default configuration for Digital Twin Robotics
+
+# Robot configuration
+robot:
+  type: mobile  # mobile, manipulator, aerial
+  platform: differential_drive  # differential_drive, ackermann, 6dof_arm, quadrotor
+  initial_pose: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]  # [x, y, z, roll, pitch, yaw]
+  
+# Physics simulation
+physics:
+  engine: pybullet  # pybullet, mujoco, gazebo
+  timestep: 0.01
+  gravity: [0, 0, -9.81]
+  real_time: false
+  
+# Sensor configuration
+sensors:
+  imu:
+    enabled: true
+    noise_std: 0.01
+    bias_std: 0.001
+  camera:
+    enabled: false
+    resolution: [640, 480]
+    fps: 30
+  lidar:
+    enabled: false
+    range_max: 10.0
+    num_beams: 360
+    
+# Controller configuration
+controller:
+  type: pid  # pid, lqr, mpc, rl
+  gains:
+    kp: 1.0
+    ki: 0.1
+    kd: 0.05
+  output_limits: [-10.0, 10.0]
+  
+# Visualization configuration
+visualization:
+  enabled: true
+  real_time: true
+  save_plots: false
+  plot_type: matplotlib  # matplotlib, plotly
+  
+# Evaluation configuration
+evaluation:
+  metrics:
+    - rmse_position
+    - settling_time
+    - path_efficiency
+    - success_rate
+    - control_effort
+  save_results: true
+  output_dir: assets/results
+  
+# Safety configuration
+safety:
+  velocity_limit: 5.0  # m/s
+  acceleration_limit: 10.0  # m/s²
+  emergency_stop_enabled: true
+  collision_detection: true
+  
+# Logging configuration
+logging:
+  level: INFO
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: logs/digital_twin.log
